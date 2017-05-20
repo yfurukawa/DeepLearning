@@ -1,1 +1,1 @@
-TEST_OBJ = testMain.o ActivationFunctionTest.o 
+TEST_OBJ = testMain.o ActivationFunctionTest.o  OutputLayerTest.o 
