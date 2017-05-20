@@ -17,7 +17,17 @@ void OutputLayer::identity(cv::Mat* matrix) {
 
 void OutputLayer::softmax(cv::Mat* matrix) {
 	cv::Mat tmpMatrix;
-	cv::exp(*matrix, tmpMatrix);
+	float maxValue(findMaxElementValue(matrix));
+	cv::exp((*matrix - maxValue), tmpMatrix);
 	cv::divide(tmpMatrix, cv::sum(tmpMatrix), *matrix);
-	std::cout << *matrix << std::endl;
+}
+
+float OutputLayer::findMaxElementValue(cv::Mat* matrix) {
+	float maxValue(0.0);
+	for(int row = 0; row < (*matrix).rows; ++row) {
+	    for(int column = 0; column < (*matrix).cols; ++column) {
+	        maxValue = (matrix->at<float>(row, column) > maxValue) ? matrix->at<float>(row, column) : maxValue;
+	    }
+	}
+	return maxValue;
 }

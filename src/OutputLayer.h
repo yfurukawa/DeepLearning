@@ -20,6 +20,7 @@ class OutputLayer {
 
  protected:
  private:
+  float findMaxElementValue(cv::Mat* matrix);
 };
 
 #endif  // OUTPUTLAYER_H_
