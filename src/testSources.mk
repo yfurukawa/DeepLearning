@@ -1,1 +1,1 @@
-TEST_SRC = ../test/testMain.cpp ../test/StepFunctionTest.cpp 
+TEST_SRC = ../test/testMain.cpp ../test/ActivationFunctionTest.cpp 

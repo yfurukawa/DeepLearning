@@ -1,1 +1,1 @@
-SRC = StepFunction.cpp 
+SRC = ActivationFunction.cpp 

@@ -1,1 +1,1 @@
-OBJ = StepFunction.o 
+OBJ = ActivationFunction.o 
