@@ -1,1 +1,1 @@
-SRC = ActivationFunction.cpp  OutputLayer.cpp 
+SRC = ActivationFunction.cpp  OutputLayer.cpp  ThreeLayeredNN.cpp 

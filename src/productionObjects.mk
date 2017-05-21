@@ -1,1 +1,1 @@
-OBJ = ActivationFunction.o  OutputLayer.o 
+OBJ = ActivationFunction.o  OutputLayer.o  ThreeLayeredNN.o 

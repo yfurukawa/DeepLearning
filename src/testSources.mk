@@ -1,1 +1,1 @@
-TEST_SRC = ../test/testMain.cpp ../test/ActivationFunctionTest.cpp  ../test/OutputLayerTest.cpp 
+TEST_SRC = ../test/testMain.cpp ../test/ActivationFunctionTest.cpp  ../test/OutputLayerTest.cpp  ../test/ThreeLayeredNNTest.cpp 

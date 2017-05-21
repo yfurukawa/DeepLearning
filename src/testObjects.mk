@@ -1,1 +1,1 @@
-TEST_OBJ = testMain.o ActivationFunctionTest.o  OutputLayerTest.o 
+TEST_OBJ = testMain.o ActivationFunctionTest.o  OutputLayerTest.o  ThreeLayeredNNTest.o 
