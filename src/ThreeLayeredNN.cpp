@@ -35,7 +35,7 @@ void ThreeLayeredNN::forward() {
 	z2 = activeFunction.sigmoid(a2);
 	a3 = z2 * network.at("W3") + network.at("b3");
 
-	outputLayer.identity(&a3);
+	y = outputLayer.identity(a3);
 
-	std::cout << a3 << std::endl;
+	std::cout << y << std::endl;
 }

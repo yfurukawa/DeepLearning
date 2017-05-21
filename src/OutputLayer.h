@@ -15,12 +15,12 @@ class OutputLayer {
   OutputLayer();
   //! Destructor
   virtual ~OutputLayer();
-  void identity(cv::Mat* matrix);
-  void softmax(cv::Mat* matrix);
+  cv::Mat identity(const cv::Mat& matrix);
+  cv::Mat softmax(const cv::Mat& matrix);
 
  protected:
  private:
-  float findMaxElementValue(cv::Mat* matrix);
+  float findMaxElementValue(const cv::Mat& matrix);
 };
 
 #endif  // OUTPUTLAYER_H_
