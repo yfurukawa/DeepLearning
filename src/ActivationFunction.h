@@ -15,9 +15,8 @@ class ActivationFunction {
   ActivationFunction();
   //! Destructor
   virtual ~ActivationFunction();
-  void sigmoid(cv::Mat* matrix);
-
-  void step(cv::Mat* matrix);
+  cv::Mat sigmoid(const cv::Mat& matrix);
+  cv::Mat step(const cv::Mat& matrix);
 
  protected:
  private:

@@ -30,11 +30,9 @@ void ThreeLayeredNN::forward() {
 	cv::Mat x = (cv::Mat_<float>(1, 2) << 1.0, 0.5);
 
 	a1 = x * network.at("W1") + network.at("b1");
-	l1.sigmoid(&a1);
-	z1 = a1;
+	z1 = l1.sigmoid(a1);
 	a2 = z1 * network.at("W2") + network.at("b2");
-	l1.sigmoid(&a2);
-	z2 = a2;
+	z2 = l1.sigmoid(a2);
 	a3 = z2 * network.at("W3") + network.at("b3");
 
 	ol.identity(&a3);
