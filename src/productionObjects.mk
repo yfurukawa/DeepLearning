@@ -1,1 +1,1 @@
-OBJ = ActivationFunction.o  OutputLayer.o  ThreeLayeredNN.o 
+OBJ = ActivationFunction.o  OutputLayer.o  ThreeLayeredNN.o MnistReaderVector.o MnistReaderOpenCV.o  MnistReaderCore.o 

@@ -2,7 +2,7 @@ CC = g++
 RM = rm -f
 INCLUDE = -I/usr/incude -I/usr/local/include
 LIB_DIR = -L/usr/lib64 -L/usr/local/lib64
-LIB = -lpthread -lopencv_core
+LIB = -lpthread -lopencv_core -lopencv_imgproc -lopencv_highgui
 OPT = -O0 -g3 -Wall -Wnon-virtual-dtor -Woverloaded-virtual -fmessage-length=0 -fprofile-arcs -ftest-coverage
 TARGET = a.out
 include productionSources.mk
