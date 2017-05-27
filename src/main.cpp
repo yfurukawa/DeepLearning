@@ -14,11 +14,11 @@ int main(int argc, char* argv[]) {
 
 
 	MnistReaderOpenCV mnistReader;
-	int number_of_images = 10000;
-	int image_size = 28 * 28;
+	//int number_of_images = 10000;
+	//int image_size = 28 * 28;
 	std::string filenamel = "../dataset/t10k-labels-idx1-ubyte";
 	//read MNIST label into double vector
-	std::vector<double> vecl(number_of_images);
+	std::vector<double> vecl;
 	vecl = mnistReader.readMnistLabel(filenamel);
 	std::cout << vecl.size() << std::endl;
 	std::cout << vecl[10] << std::endl;
