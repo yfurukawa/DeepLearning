@@ -1,15 +1,35 @@
-/*
- * Copyright
- *
-*/
+/*!------------------------------------------------
+@file       MnistReaderVector.h
+@brief      MNISTデータの画像データを読み込む
+@attention  なし
+--------------------------------------------------*/
+
 #include "./MnistReaderVector.h"
 
+/*!------------------------------------------------
+@brief      デフォルトコンストラクタ
+@note       クラスを構築する
+@attention  なし
+--------------------------------------------------*/
 MnistReaderVector::MnistReaderVector() {
 }
 
+/*!------------------------------------------------
+@brief      デフォルトデストラクタ
+@note       クラスを破棄する
+@attention  なし
+--------------------------------------------------*/
 MnistReaderVector::~MnistReaderVector() {
 }
 
+/*!------------------------------------------------
+@brief      MNISTデータ読み込み
+@note       引数で指定されたファイルからMNISTの画像データを<br>
+              読み込む
+@param[in]  filename  MNIST画像データファイル  [-] (-)
+@return     MNIST画像データが格納されたコンテナ
+@attention  ファイルが存在しない等のエラー処理は不完全
+--------------------------------------------------*/
 void MnistReaderVector::readMnist(const std::string& filename) {
     std::ifstream file (filename.c_str(), std::ios::binary);
     if (file.is_open()) {
@@ -36,7 +56,18 @@ void MnistReaderVector::readMnist(const std::string& filename) {
     				tp.push_back((double)temp);
     			}
     		}
-    		vec.push_back(tp);
+    		imageData_.push_back(tp);
     	}
     }
+}
+
+/*!------------------------------------------------
+@brief      MNISTラベルデータ読み込み
+@note       MnistReaderCoreクラスの同メソッドへ処理を移譲する
+@param[in]  filename  MNISTラベルデータファイル  [-] (-)
+@return     MNISTラベルデータが格納されたコンテナ
+@attention  ファイルが存在しない等のエラー処理は未実装
+--------------------------------------------------*/
+std::vector<double> MnistReaderVector::readMnistLabel(const std::string& filename) {
+	return readerCore.readMnistLabel(filename);
 }
