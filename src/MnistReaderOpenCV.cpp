@@ -1,19 +1,38 @@
-/*
- * Copyright
- *
-*/
+/*!------------------------------------------------
+@file       MnistReaderOpenCV.h
+@brief      MNISTデータの画像データを読み込む
+@attention  なし
+--------------------------------------------------*/
 
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 
 #include "./MnistReaderOpenCV.h"
 
+/*!------------------------------------------------
+@brief      デフォルトコンストラクタ
+@note       クラスを構築する
+@attention  なし
+--------------------------------------------------*/
 MnistReaderOpenCV::MnistReaderOpenCV() {
 }
 
+/*!------------------------------------------------
+@brief      デフォルトデストラクタ
+@note       クラスを破棄する
+@attention  なし
+--------------------------------------------------*/
 MnistReaderOpenCV::~MnistReaderOpenCV() {
 }
 
+/*!------------------------------------------------
+@brief      MNISTデータ読み込み
+@note       引数で指定されたファイルからMNISTの画像データを<br>
+              読み込む
+@param[in]  filename  MNIST画像データファイル  [-] (-)
+@return     MNIST画像データが格納されたコンテナ
+@attention  ファイルが存在しない等のエラー処理は不完全
+--------------------------------------------------*/
 std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename) {
     std::ifstream file;
     file.open(filename.c_str(), std::ifstream::in | std::ios::binary);
@@ -41,15 +60,22 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename) {
     				tp.at<uchar>(r, c) = (int) temp;
     			}
     		}
-    		vec.push_back(tp);
+    		imageData_.push_back(tp);
     	}
     }
     else {
     	std::cout << "File can not open." << std::endl;
     }
-    return vec;
+    return imageData_;
 }
 
+/*!------------------------------------------------
+@brief      MNISTラベルデータ読み込み
+@note       MnistReaderCoreクラスの同メソッドへ処理を移譲する
+@param[in]  filename  MNISTラベルデータファイル  [-] (-)
+@return     MNISTラベルデータが格納されたコンテナ
+@attention  ファイルが存在しない等のエラー処理は未実装
+--------------------------------------------------*/
 std::vector<double> MnistReaderOpenCV::readMnistLabel(const std::string& filename) {
 	return readerCore.readMnistLabel(filename);
 }
