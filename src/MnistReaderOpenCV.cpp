@@ -37,10 +37,10 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename) {
     std::ifstream file;
     file.open(filename.c_str(), std::ifstream::in | std::ios::binary);
     if (file.is_open()) {
-    	int magic_number = 0;
-    	int number_of_images = 0;
-    	int n_rows = 0;
-    	int n_cols = 0;
+    	int magic_number(0);
+    	int number_of_images(0);
+    	int n_rows(0);
+    	int n_cols(0);
 
     	file.read((char*) &magic_number, sizeof(magic_number));
     	magic_number = readerCore.reverseInt(magic_number);
@@ -55,9 +55,9 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename) {
     		cv::Mat tp = cv::Mat::zeros(n_rows, n_cols, CV_8UC1);
     		for(int r = 0; r < n_rows; ++r) {
     			for(int c = 0; c < n_cols; ++c) {
-    				unsigned char temp = 0;
+    				unsigned char temp(0);
     				file.read((char*) &temp, sizeof(temp));
-    				tp.at<uchar>(r, c) = (int) temp;
+    				tp.at<uchar>(r, c) = static_cast<int>(temp);
     			}
     		}
     		imageData_.push_back(tp);
