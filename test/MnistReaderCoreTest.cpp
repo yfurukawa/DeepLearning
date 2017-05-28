@@ -1,6 +1,6 @@
 #include "MnistReaderCoreTest.h"
 
-MnistReaderCoreTest::MnistReaderCoreTest() {
+MnistReaderCoreTest::MnistReaderCoreTest() : sut(NULL) {
 
 }
 
@@ -16,7 +16,17 @@ void MnistReaderCoreTest::TearDown() {
 	delete sut;
 }
 
-TEST_F (MnistReaderCoreTest, testNameIsHere_ChangeThis) {
-/* Write a test code here. */
-
+TEST_F (MnistReaderCoreTest, testReverseInt) {
+	int expect(0x78563412);
+	EXPECT_EQ(expect, sut->reverseInt(0x12345678));
 }
+
+TEST_F (MnistReaderCoreTest, testReadMnistLabel) {
+	int expect(7);
+	std::vector<double> result;
+	std::string filename = "../dataset/t10k-labels-idx1-ubyte";
+
+	result = sut->readMnistLabel(filename);
+	EXPECT_EQ(expect, result[0]);
+}
+
