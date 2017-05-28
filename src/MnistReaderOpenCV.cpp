@@ -57,12 +57,13 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename, c
     	n_cols = readerCore.reverseInt(n_cols);
 
     	for(int i = 0; i < number_of_images; ++i) {
-    		cv::Mat tp = cv::Mat::zeros(n_rows, n_cols, CV_8UC1);
+    		//cv::Mat tp = cv::Mat::zeros(n_rows, n_cols, CV_8UC1);
+    		cv::Mat tp = cv::Mat::zeros(n_rows, n_cols, CV_32FC1);
     		for(int r = 0; r < n_rows; ++r) {
     			for(int c = 0; c < n_cols; ++c) {
     				unsigned char temp(0);
     				file.read((char*) &temp, sizeof(temp));
-    				tp.at<uchar>(r, c) = static_cast<int>(temp) / normalizeFactor;
+    				tp.at<float>(r, c) = static_cast<float>(temp) / normalizeFactor;
     			}
     		}
     		imageData_.push_back(tp);

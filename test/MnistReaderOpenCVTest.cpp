@@ -28,8 +28,8 @@ TEST_F (MnistReaderOpenCVTest, testReadMnist_unnormalize_unflatten) {
 	// std::cout << vec[0] << std::endl;
 
 	EXPECT_EQ(10000, vec.size());
-	EXPECT_EQ(254, vec[0].at<unsigned char>(8, 8));
-	EXPECT_EQ(2, vec[0].dims);
+	EXPECT_FLOAT_EQ(254, vec[0].at<float>(8, 8));
+	EXPECT_FLOAT_EQ(2, vec[0].dims);
 }
 
 TEST_F (MnistReaderOpenCVTest, testReadMnist_normalize_unflatten) {
@@ -43,6 +43,6 @@ TEST_F (MnistReaderOpenCVTest, testReadMnist_normalize_unflatten) {
 	// std::cout << vec[0] << std::endl;
 
 	EXPECT_EQ(10000, vec.size());
-	EXPECT_NEAR(0.996078431372549, vec[0].at<unsigned char>(8, 8), 1e-4);
+	EXPECT_NEAR(0.996078431372549, vec[0].at<float>(8, 8), 1e-5);
 	EXPECT_EQ(2, vec[0].dims);
 }
