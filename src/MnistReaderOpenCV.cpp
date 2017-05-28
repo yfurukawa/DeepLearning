@@ -29,11 +29,13 @@ MnistReaderOpenCV::~MnistReaderOpenCV() {
 @brief      MNISTデータ読み込み
 @note       引数で指定されたファイルからMNISTの画像データを<br>
               読み込む
-@param[in]  filename  MNIST画像データファイル  [-] (-)
+@param[in]  filename   MNIST画像データファイル  [-] (-)
+@param[in]  normalize  読み込んだMNIST画像データを正規化する  [-] (-)
+@param[in]  flatten    MNIST画像データを1次元配列にする  [-] (-)
 @return     MNIST画像データが格納されたコンテナ
 @attention  ファイルが存在しない等のエラー処理は不完全
 --------------------------------------------------*/
-std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename) {
+std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename, const bool& normalize=true, const bool flatten=true) {
     std::ifstream file;
     file.open(filename.c_str(), std::ifstream::in | std::ios::binary);
     if (file.is_open()) {
@@ -41,6 +43,9 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename) {
     	int number_of_images(0);
     	int n_rows(0);
     	int n_cols(0);
+    	int normalizeFactor(1);
+
+    	normalizeFactor = normalize ? 255 : 1;
 
     	file.read((char*) &magic_number, sizeof(magic_number));
     	magic_number = readerCore.reverseInt(magic_number);
@@ -57,7 +62,7 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename) {
     			for(int c = 0; c < n_cols; ++c) {
     				unsigned char temp(0);
     				file.read((char*) &temp, sizeof(temp));
-    				tp.at<uchar>(r, c) = static_cast<int>(temp);
+    				tp.at<uchar>(r, c) = static_cast<int>(temp) / normalizeFactor;
     			}
     		}
     		imageData_.push_back(tp);

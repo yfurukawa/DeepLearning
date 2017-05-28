@@ -34,7 +34,7 @@ class MnistReaderOpenCV {
   //! Destructor
   virtual ~MnistReaderOpenCV();
   //! MNISTデータ読み込み
-  std::vector<cv::Mat> readMnist(const std::string& filename);
+  std::vector<cv::Mat> readMnist(const std::string& filename, const bool& normalize, const bool flatten);
   //! MnisiReaderCoreへのデリゲータ
   std::vector<double> readMnistLabel(const std::string& filename);
 
