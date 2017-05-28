@@ -87,9 +87,10 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename, c
 @brief      MNISTラベルデータ読み込み
 @note       MnistReaderCoreクラスの同メソッドへ処理を移譲する
 @param[in]  filename  MNISTラベルデータファイル  [-] (-)
+@param[in]  oneHotLabel ラベルをone-hot表現にする  [-] (-)
 @return     MNISTラベルデータが格納されたコンテナ
 @attention  ファイルが存在しない等のエラー処理は未実装
 --------------------------------------------------*/
-std::vector<double> MnistReaderOpenCV::readMnistLabel(const std::string& filename) {
-	return readerCore.readMnistLabel(filename);
+std::vector<double> MnistReaderOpenCV::readMnistLabel(const std::string& filename, const bool& oneHotLabel) {
+	return readerCore.readMnistLabel(filename, oneHotLabel);
 }

@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 	std::string filenamel = "../dataset/t10k-labels-idx1-ubyte";
 	//read MNIST label into double vector
 	std::vector<double> vecl;
-	vecl = mnistReader.readMnistLabel(filenamel);
+	vecl = mnistReader.readMnistLabel(filenamel, false);
 	std::cout << vecl.size() << std::endl;
 	std::cout << vecl[0] << std::endl;
 

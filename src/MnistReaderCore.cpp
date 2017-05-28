@@ -47,10 +47,11 @@ int MnistReaderCore::reverseInt (int data) {
 @note       引数で指定されたファイルからMNISTのラベルデータを<br>
               読み込む
 @param[in]  filename  MNISTラベルデータファイル  [-] (-)
+@param[in]  oneHotLabel ラベルをone-hot表現にする  [-] (-)
 @return     MNISTラベルデータが格納されたコンテナ
 @attention  ファイルが存在しない等のエラー処理は未実装
 --------------------------------------------------*/
-std::vector<double> MnistReaderCore::readMnistLabel(const std::string& filename) {
+std::vector<double> MnistReaderCore::readMnistLabel(const std::string& filename, const bool& oneHotLabel) {
 	std::ifstream file(filename.c_str(), std::ios::binary);
 	int magic_number(0);
 	int number_of_images(0);
