@@ -46,3 +46,19 @@ TEST_F (MnistReaderOpenCVTest, testReadMnist_normalize_unflatten) {
 	EXPECT_NEAR(0.996078431372549, vec[0].at<float>(8, 8), 1e-5);
 	EXPECT_EQ(2, vec[0].dims);
 }
+
+
+TEST_F (MnistReaderOpenCVTest, testReadMnist_unnormalize_flatten) {
+	std::string filename = "../dataset/t10k-images-idx3-ubyte";
+	std::vector<cv::Mat> vec;
+	bool normalize(false);
+	bool flatten(true);
+
+	vec = sut->readMnist(filename, normalize, flatten);
+
+	//std::cout << vec[0] << std::endl;
+
+	EXPECT_EQ(10000, vec.size());
+	EXPECT_EQ(784, vec[0].cols);
+	EXPECT_EQ(1, vec[0].rows);
+}
