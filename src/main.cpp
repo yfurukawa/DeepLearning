@@ -21,17 +21,19 @@ int main(int argc, char* argv[]) {
 	std::vector<double> vecl;
 	vecl = mnistReader.readMnistLabel(filenamel);
 	std::cout << vecl.size() << std::endl;
-	std::cout << vecl[10] << std::endl;
+	std::cout << vecl[0] << std::endl;
 
 	std::string filename = "../dataset/t10k-images-idx3-ubyte";
 
     //read MNIST iamge into OpenCV Mat vector
 	std::vector<cv::Mat> vec;
 	//read_Mnist(filename, vec);
-	vec = mnistReader.readMnist(filename);
+	bool normalize(false);
+	bool flatten(false);
+	vec = mnistReader.readMnist(filename, normalize, flatten);
 	if(vec.size() != 0) {
 		std::cout << vec.size() << std::endl;
-		cv::imshow("1st", vec[10]);
+		cv::imshow("1st", vec[0]);
 		cv::waitKey();
 	}
 
