@@ -34,7 +34,7 @@ class MnistReaderVector {
   //! MNISTデータ読み込み
   void readMnist(const std::string& filename);
   //! MnisiReaderCoreへのデリゲータ
-  std::vector<double> readMnistLabel(const std::string& filename, const bool& oneHotLabel);
+  std::vector<float> readMnistLabel(const std::string& filename, const bool& oneHotLabel);
 
  protected:
  private:

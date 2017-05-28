@@ -63,7 +63,6 @@ TEST_F (MnistReaderOpenCVTest, testReadMnist_unnormalize_flatten) {
 	EXPECT_EQ(1, vec[0].rows);
 }
 
-
 TEST_F (MnistReaderOpenCVTest, testReadMnist_normalize_flatten) {
 	std::string filename = "../dataset/t10k-images-idx3-ubyte";
 	std::vector<cv::Mat> vec;
@@ -82,4 +81,22 @@ TEST_F (MnistReaderOpenCVTest, testReadMnist_normalize_flatten) {
 	EXPECT_NEAR(0.9921568, vec[0].at<float>(1,185), 1e-5);
 	EXPECT_EQ(784, vec[0].cols);
 	EXPECT_EQ(1, vec[0].rows);
+}
+
+TEST_F (MnistReaderOpenCVTest, testReadMnistLabel_notOneHot) {
+	std::string filename = "../dataset/t10k-labels-idx1-ubyte";
+	cv::Mat vec;
+	bool oneHotLabel(false);
+
+	vec = sut->readMnistLabel(filename, oneHotLabel);
+
+	/*
+	std::cout << vec[0] << std::endl;
+	for(int col = 180; col <= 190; ++col) {
+		std::cout << "col = " << col << " : " << vec[0].at<float>(1,col) << std::endl;
+	}
+	*/
+
+	//EXPECT_EQ(10000, vec.size());
+	EXPECT_EQ(7, vec.at<float>(0,0));
 }

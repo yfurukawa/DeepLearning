@@ -23,7 +23,7 @@ TEST_F (MnistReaderCoreTest, testReverseInt) {
 
 TEST_F (MnistReaderCoreTest, testReadMnistLabel_notOneHotLabel) {
 	int expect(7);
-	std::vector<double> result;
+	std::vector<float> result;
 	std::string filename = "../dataset/t10k-labels-idx1-ubyte";
 
 	result = sut->readMnistLabel(filename, false);

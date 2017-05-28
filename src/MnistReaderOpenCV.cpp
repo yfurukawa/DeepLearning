@@ -91,6 +91,11 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename, c
 @return     MNISTラベルデータが格納されたコンテナ
 @attention  ファイルが存在しない等のエラー処理は未実装
 --------------------------------------------------*/
-std::vector<double> MnistReaderOpenCV::readMnistLabel(const std::string& filename, const bool& oneHotLabel) {
-	return readerCore.readMnistLabel(filename, oneHotLabel);
+//std::vector<double> MnistReaderOpenCV::readMnistLabel(const std::string& filename, const bool& oneHotLabel) {
+cv::Mat MnistReaderOpenCV::readMnistLabel(const std::string& filename, const bool& oneHotLabel) {
+	int numberOfClasses(oneHotLabel ? 10 : 1);
+	std::vector<float> tempLabel;
+	tempLabel = readerCore.readMnistLabel(filename, oneHotLabel);
+	cv::Mat label = cv::Mat_<float>(tempLabel.size(), numberOfClasses);
+	return label;
 }
