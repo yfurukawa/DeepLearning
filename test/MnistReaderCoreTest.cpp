@@ -26,7 +26,7 @@ TEST_F (MnistReaderCoreTest, testReadMnistLabel_notOneHotLabel) {
 	std::vector<float> result;
 	std::string filename = "../dataset/t10k-labels-idx1-ubyte";
 
-	result = sut->readMnistLabel(filename, false);
+	result = sut->readMnistLabel(filename);
 	EXPECT_EQ(expect, result[0]);
 }
 

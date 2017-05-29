@@ -70,5 +70,5 @@ void MnistReaderVector::readMnist(const std::string& filename) {
 @attention  ファイルが存在しない等のエラー処理は未実装
 --------------------------------------------------*/
 std::vector<float> MnistReaderVector::readMnistLabel(const std::string& filename, const bool& oneHotLabel) {
-	return readerCore.readMnistLabel(filename, oneHotLabel);
+	return readerCore.readMnistLabel(filename);
 }

@@ -51,11 +51,12 @@ int MnistReaderCore::reverseInt (int data) {
 @return     MNISTラベルデータが格納されたコンテナ
 @attention  ファイルが存在しない等のエラー処理は未実装
 --------------------------------------------------*/
-std::vector<float> MnistReaderCore::readMnistLabel(const std::string& filename, const bool& oneHotLabel) {
+std::vector<float> MnistReaderCore::readMnistLabel(const std::string& filename) {
 	std::ifstream file(filename.c_str(), std::ios::binary);
 	int magic_number(0);
 	int number_of_images(0);
 	std::vector<float> vecl;
+	vecl.clear();
 
 	if (file.is_open()) {
 		file.read((char*) &magic_number, sizeof(magic_number));

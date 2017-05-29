@@ -35,7 +35,7 @@ class MnistReaderCore {
   //! Destructor
   virtual ~MnistReaderCore();
   //! MNISTデータのラベルデータ読み込み
-  std::vector<float> readMnistLabel(const std::string& filename, const bool& oneHotLabel);
+  std::vector<float> readMnistLabel(const std::string& filename);
   //! エンディアン変換
   int reverseInt (int data);
 

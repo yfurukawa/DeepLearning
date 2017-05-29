@@ -95,7 +95,7 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename, c
 cv::Mat MnistReaderOpenCV::readMnistLabel(const std::string& filename, const bool& oneHotLabel) {
 	int numberOfClasses(oneHotLabel ? 10 : 1);
 	std::vector<float> tempLabel;
-	tempLabel = readerCore.readMnistLabel(filename, oneHotLabel);
+	tempLabel = readerCore.readMnistLabel(filename);
 	cv::Mat label = cv::Mat_<float>(tempLabel.size(), numberOfClasses);
 	return label;
 }
