@@ -17,11 +17,11 @@ int main(int argc, char* argv[]) {
 	//int number_of_images = 10000;
 	//int image_size = 28 * 28;
 	std::string filenamel = "../dataset/t10k-labels-idx1-ubyte";
-	//read MNIST label into double vector
-	std::vector<double> vecl;
-	vecl = mnistReader.readMnistLabel(filenamel, false);
+	//read MNIST label into cv::Mat
+	cv::Mat vecl;
+	vecl = mnistReader.readMnistLabel(filenamel, true);
 	std::cout << vecl.size() << std::endl;
-	std::cout << vecl[0] << std::endl;
+	std::cout << vecl.at<float>(0) << std::endl;
 
 	std::string filename = "../dataset/t10k-images-idx3-ubyte";
 
