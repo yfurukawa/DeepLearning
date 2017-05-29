@@ -100,3 +100,24 @@ TEST_F (MnistReaderOpenCVTest, testReadMnistLabel_notOneHot) {
 	//EXPECT_EQ(10000, vec.size());
 	EXPECT_EQ(7, vec.at<float>(0,0));
 }
+
+
+TEST_F (MnistReaderOpenCVTest, testReadMnistLabel_OneHot) {
+	std::string filename = "../dataset/t10k-labels-idx1-ubyte";
+	cv::Mat vec;
+	bool oneHotLabel(true);
+
+	vec = sut->readMnistLabel(filename, oneHotLabel);
+
+	//EXPECT_EQ(10000, vec.size());
+	EXPECT_EQ(0, vec.at<float>(0,0));
+	EXPECT_EQ(0, vec.at<float>(0,1));
+	EXPECT_EQ(0, vec.at<float>(0,2));
+	EXPECT_EQ(0, vec.at<float>(0,3));
+	EXPECT_EQ(0, vec.at<float>(0,4));
+	EXPECT_EQ(0, vec.at<float>(0,5));
+	EXPECT_EQ(0, vec.at<float>(0,6));
+	EXPECT_EQ(1, vec.at<float>(0,7));
+	EXPECT_EQ(0, vec.at<float>(0,8));
+	EXPECT_EQ(0, vec.at<float>(0,9));
+}
