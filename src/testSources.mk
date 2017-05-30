@@ -1,1 +1,1 @@
-TEST_SRC = ../test/testMain.cpp ../test/ActivationFunctionTest.cpp  ../test/OutputLayerTest.cpp  ../test/ThreeLayeredNNTest.cpp ../test/MnistReaderVectorTest.cpp ../test/MnistReaderOpenCVTest.cpp ../test/MnistReaderCoreTest.cpp 
+TEST_SRC = ../test/testMain.cpp ../test/ActivationFunctionTest.cpp  ../test/OutputLayerTest.cpp  ../test/ThreeLayeredNNTest.cpp ../test/MnistReaderVectorTest.cpp ../test/MnistReaderOpenCVTest.cpp ../test/MnistReaderCoreTest.cpp ../test/ConfigDataHolderTest.cpp
