@@ -92,6 +92,11 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename, c
 @attention  ファイルが存在しない等のエラー処理は未実装
 --------------------------------------------------*/
 cv::Mat MnistReaderOpenCV::readMnistLabel(const std::string& filename, const bool& oneHotLabel) {
+	double totalTime(0);
+	int64 endTime(0);
+	double freq(cv::getTickFrequency());
+	int64 startTime(cv::getTickCount());
+
 	int numberOfClasses(oneHotLabel ? 10 : 1);
 	std::vector<float> tempLabel;
 	tempLabel = readerCore.readMnistLabel(filename);
@@ -106,5 +111,12 @@ cv::Mat MnistReaderOpenCV::readMnistLabel(const std::string& filename, const boo
 			}
 		}
 	}
+	endTime = cv::getTickCount();
+	totalTime = static_cast<double>((endTime - startTime)) / (freq / 1e3);
+	std::cout << "Start Time = " << startTime << std::endl;
+	std::cout << "End   Time = " << endTime << std::endl;
+	std::cout << "Difference = " << endTime - startTime << std::endl;
+	std::cout << "Frequency  = " << freq << "[Hz]" << std::endl;
+	std::cout << "Total Time = " << totalTime << "[us]" << std::endl;
 	return label;
 }
