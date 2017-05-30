@@ -19,7 +19,8 @@ int main(int argc, char* argv[]) {
 	std::string filenamel = "../dataset/t10k-labels-idx1-ubyte";
 	//read MNIST label into cv::Mat
 	cv::Mat vecl;
-	vecl = mnistReader.readMnistLabel(filenamel, true);
+	bool oneHotLabel(true);
+	vecl = mnistReader.readMnistLabel(filenamel, oneHotLabel);
 	std::cout << vecl.size() << std::endl;
 	std::cout << vecl.at<float>(0) << std::endl;
 
