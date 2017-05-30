@@ -101,16 +101,26 @@ cv::Mat MnistReaderOpenCV::readMnistLabel(const std::string& filename, const boo
 	std::vector<float> tempLabel;
 	tempLabel = readerCore.readMnistLabel(filename);
 	cv::Mat label = cv::Mat::zeros(tempLabel.size(), numberOfClasses, CV_32FC1);
+
+#ifdef _TEST
+	if(oneHotLabel)
+		covertVector2Mat(tempLabel, numberOfClasses, &label);
+	else
+		covertVector2Mat(tempLabel, &label);
+#else
+
 	for( unsigned int row = 0; row <= tempLabel.size(); ++row ) {
-		for( int colmun = 0; colmun < numberOfClasses; ++colmun ) {
+		for( int column = 0; column < numberOfClasses; ++column ) {
 			if(oneHotLabel) {
-				label.at<float>(row, colmun) = tempLabel[row] == colmun ? 1 : 0;
+				label.at<float>(row, column) = tempLabel[row] == column ? 1 : 0;
 			}
 			else {
-				label.at<float>(row, colmun) = tempLabel[row];
+				label.at<float>(row, column) = tempLabel[row];
 			}
 		}
 	}
+#endif
+
 	endTime = cv::getTickCount();
 	totalTime = static_cast<double>((endTime - startTime)) / (freq / 1e3);
 	std::cout << "Start Time = " << startTime << std::endl;
@@ -119,4 +129,37 @@ cv::Mat MnistReaderOpenCV::readMnistLabel(const std::string& filename, const boo
 	std::cout << "Frequency  = " << freq << "[Hz]" << std::endl;
 	std::cout << "Total Time = " << totalTime << "[us]" << std::endl;
 	return label;
+}
+
+/*!------------------------------------------------
+@brief      vector,cv::Mat変換
+@note       std::vectorに格納されたMNISTラベルデータを<br>
+            cv::Matに変換する
+@param[in]  tempLabel  MNISTラベルデータ  [-] (-)
+@param[out] label MNISTラベルデータ（cv::Mat型）  [-] (-)
+@return     なし
+@attention  なし
+--------------------------------------------------*/
+void MnistReaderOpenCV::covertVector2Mat(const std::vector<float>& tempLabel, cv::Mat* label) {
+	for(unsigned int row = 0; row <= tempLabel.size(); ++row) {
+		label->at<float>(row, 0) = tempLabel[row];
+	}
+}
+
+/*!------------------------------------------------
+@brief      vector,cv::Mat変換
+@note       std::vectorに格納されたMNISTラベルデータを<br>
+            one-hot形式のcv::Matに変換する
+@param[in]  tempLabel  MNISTラベルデータ  [-] (-)
+@param[in]  columns one-hot表現にする際のclass数 [-] (-)
+@param[out] label MNISTラベルデータ（cv::Mat型）  [-] (-)
+@return     なし
+@attention  なし
+--------------------------------------------------*/
+void MnistReaderOpenCV::covertVector2Mat(const std::vector<float>& tempLabel, const int& columns, cv::Mat* label) {
+	for( unsigned int row = 0; row <= tempLabel.size(); ++row ) {
+		for( int column = 0; column < columns; ++column ) {
+				label->at<float>(row, column) = tempLabel[row] == column ? 1 : 0;
+		}
+	}
 }

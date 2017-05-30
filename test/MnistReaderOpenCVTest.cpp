@@ -109,7 +109,6 @@ TEST_F (MnistReaderOpenCVTest, testReadMnistLabel_OneHot) {
 
 	vec = sut->readMnistLabel(filename, oneHotLabel);
 
-	//EXPECT_EQ(10000, vec.size());
 	EXPECT_EQ(0, vec.at<float>(0,0));
 	EXPECT_EQ(0, vec.at<float>(0,1));
 	EXPECT_EQ(0, vec.at<float>(0,2));
