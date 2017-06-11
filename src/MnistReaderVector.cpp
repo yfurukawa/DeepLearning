@@ -65,7 +65,7 @@ void MnistReaderVector::readMnist(const std::string& filename) {
 @brief      MNISTラベルデータ読み込み
 @note       MnistReaderCoreクラスの同メソッドへ処理を移譲する
 @param[in]  filename  MNISTラベルデータファイル  [-] (-)
-@param[in]  oneHotLabel ラベルをone-hot表現にする  [-] (-)
+@param[in]  oneHotLabel ラベルをone-hot表現にする  [-] (true, false)
 @return     MNISTラベルデータが格納されたコンテナ
 @attention  ファイルが存在しない等のエラー処理は未実装
 --------------------------------------------------*/
