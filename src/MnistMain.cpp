@@ -36,6 +36,18 @@ MnistMain::~MnistMain() {
 }
 
 /*!------------------------------------------------
+@brief      処理を開始する
+@note       処理を開始する
+@return     なし
+@attention  なし
+--------------------------------------------------*/
+int MnistMain::run() {
+	initialize();
+
+	return 0;
+}
+
+/*!------------------------------------------------
 @brief      
 @note       
 @param[in]  パラメータ名  説明  [単位] (範囲)
@@ -43,7 +55,7 @@ MnistMain::~MnistMain() {
 @return     なし
 @attention  なし
 --------------------------------------------------*/
-int MnistMain::run() {
+void MnistMain::initialize() {
 	MnistReaderOpenCV* mnistReader;
 	mnistReader = new MnistReaderOpenCV();
 
@@ -54,8 +66,10 @@ int MnistMain::run() {
 	bool oneHotLabel(true);
 	std::string filename = "../dataset/t10k-labels-idx1-ubyte";
 	labels = mnistReader->readMnistLabel(filename, oneHotLabel);
+	/*
 	std::cout << labels.size() << std::endl;
 	std::cout << labels.at<float>(0) << std::endl;
+	*/
 
 	//read MNIST iamge into OpenCV Mat vector
 	filename = "../dataset/t10k-images-idx3-ubyte";
@@ -64,13 +78,13 @@ int MnistMain::run() {
 	bool flatten(false);
 
 	images = mnistReader->readMnist(filename, normalize, flatten);
+	/*
 	if(images.size() != 0) {
 		std::cout << images.size() << std::endl;
 		cv::imshow("1st", images[0]);
 		cv::waitKey();
 	}
-
+	*/
 	delete mnistReader;
 
-	return 0;
 }

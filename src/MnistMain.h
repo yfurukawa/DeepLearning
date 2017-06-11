@@ -35,9 +35,10 @@ class MnistMain {
 
  protected:
  private:
-  MnistMain();
   int argc_;
   char** argv_;
+  MnistMain();
+  void initialize();
 };
 
 #endif  // MNISTMAIN_H_
