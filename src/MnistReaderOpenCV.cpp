@@ -30,8 +30,8 @@ MnistReaderOpenCV::~MnistReaderOpenCV() {
 @note       引数で指定されたファイルからMNISTの画像データを<br>
               読み込む
 @param[in]  filename   MNIST画像データファイル  [-] (-)
-@param[in]  normalize  読み込んだMNIST画像データを正規化する  [-] (-)
-@param[in]  flatten    MNIST画像データを1次元配列にする  [-] (-)
+@param[in]  normalize  読み込んだMNIST画像データを正規化する  [-] (true, false)
+@param[in]  flatten    MNIST画像データを1次元配列にする  [-] (true, false)
 @return     MNIST画像データが格納されたコンテナ
 @attention  ファイルが存在しない等のエラー処理は不完全
 --------------------------------------------------*/
@@ -87,7 +87,7 @@ std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename, c
 @brief      MNISTラベルデータ読み込み
 @note       MnistReaderCoreクラスの同メソッドへ処理を移譲する
 @param[in]  filename  MNISTラベルデータファイル  [-] (-)
-@param[in]  oneHotLabel ラベルをone-hot表現にする  [-] (-)
+@param[in]  oneHotLabel ラベルをone-hot表現にする  [-] (true, false)
 @return     MNISTラベルデータが格納されたコンテナ
 @attention  ファイルが存在しない等のエラー処理は未実装
 --------------------------------------------------*/
