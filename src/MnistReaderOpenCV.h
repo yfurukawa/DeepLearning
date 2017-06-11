@@ -40,7 +40,7 @@ class MnistReaderOpenCV {
 
  protected:
  private:
-  std::vector<cv::Mat> imageData_; //!< 読み込んだ画像データを保持するコンテナ
+  std::vector<cv::Mat> imageData_; //!< 読み込んだ画像データを保持するコンテナ  FIXME コンテナに入れるのではなく、cv::Matに入れるように修正する
   MnistReaderCore readerCore;      //!< ラベルを読み込むための共通インスタンス
   void covertVector2Mat(const std::vector<float>& tempLabel, cv::Mat* label);
   void covertVector2Mat(const std::vector<float>& tempLabel, const int& columns, cv::Mat* label);
