@@ -35,7 +35,7 @@ MnistReaderOpenCV::~MnistReaderOpenCV() {
 @return     MNIST画像データが格納されたコンテナ
 @attention  ファイルが存在しない等のエラー処理は不完全
 --------------------------------------------------*/
-std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename, const bool& normalize=true, const bool flatten=true) {
+std::vector<cv::Mat> MnistReaderOpenCV::readMnist(const std::string& filename, const bool& normalize, const bool& flatten) {
     std::ifstream file;
     file.open(filename.c_str(), std::ifstream::in | std::ios::binary);
     if (file.is_open()) {
