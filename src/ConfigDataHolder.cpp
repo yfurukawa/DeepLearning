@@ -4,6 +4,7 @@
 @attention  なし
 --------------------------------------------------*/
 
+#include <cstdlib>
 #include "ConfigDataHolder.h"
 #include "FileDAO.h"
 
