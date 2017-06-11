@@ -4,8 +4,12 @@
 #include "MnistMain.h"
 
 int main(int argc, char* argv[]) {
+	MnistMain* mnist;
+	mnist = new MnistMain(argc, argv);
 
-		return mnist::mnistMain(argc, argv);
+	return mnist->run();
+
+	delete mnist;
 	/*
 	ThreeLayeredNN network;
 	network.initialize();
