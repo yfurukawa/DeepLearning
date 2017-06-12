@@ -39,6 +39,11 @@ class MnistMain {
   char** argv_;
   MnistMain();
   void initialize();
+  cv::Mat labels_;
+  cv::Mat images_;
+  bool oneHotLabel_;
+  bool normalize_;
+  bool flatten_;
 };
 
 #endif  // MNISTMAIN_H_

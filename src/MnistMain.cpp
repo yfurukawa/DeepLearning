@@ -16,7 +16,7 @@
 @note       クラスを構築する
 @attention  なし
 --------------------------------------------------*/
-MnistMain::MnistMain() : argc_(0), argv_(0x00) {
+MnistMain::MnistMain() : argc_(0), argv_(0x00), oneHotLabel_(true), normalize_(true), flatten_(true) {
 }
 
 /*!------------------------------------------------
@@ -24,7 +24,7 @@ MnistMain::MnistMain() : argc_(0), argv_(0x00) {
 @note       クラスを構築する
 @attention  なし
 --------------------------------------------------*/
-MnistMain::MnistMain(int argc, char** argv) : argc_(argc), argv_(argv) {
+MnistMain::MnistMain(int argc, char** argv) : argc_(argc), argv_(argv), oneHotLabel_(true), normalize_(true), flatten_(true) {
 }
 
 /*!------------------------------------------------
@@ -62,10 +62,8 @@ void MnistMain::initialize() {
 	//イメージ数 = 10000
 	//イメージサイズ = 28 * 28
 
-	cv::Mat labels;
-	bool oneHotLabel(true);
 	std::string filename = "../dataset/t10k-labels-idx1-ubyte";
-	labels = mnistReader->readMnistLabel(filename, oneHotLabel);
+	labels_ = mnistReader->readMnistLabel(filename, oneHotLabel_);
 	/*
 	std::cout << labels.size() << std::endl;
 	std::cout << labels.at<float>(0) << std::endl;
@@ -73,18 +71,15 @@ void MnistMain::initialize() {
 
 	//read MNIST iamge into OpenCV Mat vector
 	filename = "../dataset/t10k-images-idx3-ubyte";
-	std::vector<cv::Mat> images;
-	bool normalize(false);
-	bool flatten(false);
+	images_ = mnistReader->readMnist(filename, normalize_, flatten_);
 
-	images = mnistReader->readMnist(filename, normalize, flatten);
-	/*
-	if(images.size() != 0) {
-		std::cout << images.size() << std::endl;
-		cv::imshow("1st", images[0]);
+	if(images_.rows != 0) {
+		std::cout << images_.dims << std::endl;
+		std::cout << images_.rows << std::endl;
+		//cv::imshow("1st", images_.);
 		cv::waitKey();
 	}
-	*/
+
 	delete mnistReader;
 
 }
