@@ -43,6 +43,7 @@ MnistMain::~MnistMain() {
 --------------------------------------------------*/
 int MnistMain::run() {
 	initialize();
+	establishNetwork();
 
 	return 0;
 }
@@ -82,4 +83,21 @@ void MnistMain::initialize() {
 
 	delete mnistReader;
 
+}
+
+/*!------------------------------------------------
+@brief
+@note
+@param[in]  パラメータ名  説明  [単位] (範囲)
+@param[out]
+@return     なし
+@attention  なし
+--------------------------------------------------*/
+void MnistMain::establishNetwork() {
+	network["W1"] = (cv::Mat_<float>(2, 3) << 0.1, 0.3, 0.5, 0.2, 0.4, 0.6);
+	network["b1"] = (cv::Mat_<float>(1, 3) << 0.1, 0.2, 0.3);
+	network["W2"]	= (cv::Mat_<float>(3, 2) << 0.1, 0.4, 0.2, 0.5, 0.3, 0.6);
+	network["b2"]	= (cv::Mat_<float>(1, 2) << 0.1, 0.2);
+	network["W3"]	= (cv::Mat_<float>(2, 2) << 0.1, 0.3, 0.2, 0.4);
+	network["b3"] = (cv::Mat_<float>(1, 2) << 0.1, 0.2);
 }

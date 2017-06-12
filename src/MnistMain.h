@@ -9,6 +9,7 @@
 
 // インクルードファイル ================================
 #include <string>
+#include <map>
 
 // クラスの前方宣言 ====================================
 class MnistReaderOpenCV;
@@ -37,13 +38,16 @@ class MnistMain {
  private:
   int argc_;
   char** argv_;
-  MnistMain();
-  void initialize();
   cv::Mat labels_;
   cv::Mat images_;
   bool oneHotLabel_;
   bool normalize_;
   bool flatten_;
+  std::map<std::string, cv::Mat > network;
+  MnistMain();
+  void initialize();
+  void establishNetwork();
+
 };
 
 #endif  // MNISTMAIN_H_
