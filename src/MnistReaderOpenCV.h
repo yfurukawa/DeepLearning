@@ -34,16 +34,20 @@ class MnistReaderOpenCV {
   //! Destructor
   virtual ~MnistReaderOpenCV();
   //! MNISTデータ読み込み
-  std::vector<cv::Mat> readMnist(const std::string& filename, const bool& normalize, const bool& flatten);
+  cv::Mat readMnist(const std::string& filename, const bool& normalize, const bool& flatten);
   //! MnisiReaderCoreへのデリゲータ
   cv::Mat readMnistLabel(const std::string& filename, const bool& oneHotLabel);
 
  protected:
  private:
   std::vector<cv::Mat> imageData_; //!< 読み込んだ画像データを保持するコンテナ  FIXME コンテナに入れるのではなく、cv::Matに入れるように修正する
+  cv::Mat image_;  //!< 読み込んだ画像データ
   MnistReaderCore readerCore;      //!< ラベルを読み込むための共通インスタンス
   void covertVector2Mat(const std::vector<float>& tempLabel, cv::Mat* label);
   void covertVector2Mat(const std::vector<float>& tempLabel, const int& columns, cv::Mat* label);
+  cv::Mat readMnistFalatten(const std::string& filename, const bool& normalize);
+  cv::Mat readMnistMatrix(const std::string& filename, const bool& normalize);
+
 };
 
 #endif  // MNISTREADEROPENCV_H_
