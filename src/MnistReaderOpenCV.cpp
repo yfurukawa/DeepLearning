@@ -179,7 +179,7 @@ cv::Mat MnistReaderOpenCV::readMnistFalatten(const std::string& filename, const 
 }
 
 cv::Mat MnistReaderOpenCV::readMnistMatrix(const std::string& filename, const bool& normalize) {
-
+	// FIXME 未だできていない
     std::ifstream file;
     file.open(filename.c_str(), std::ifstream::in | std::ios::binary);
     if (file.is_open()) {
