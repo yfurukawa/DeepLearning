@@ -44,10 +44,11 @@ class MnistMain {
   bool normalize_;
   bool flatten_;
   std::map<std::string, cv::Mat > network;
+	int accuracyCount_;
   MnistMain();
   void initialize();
   void establishNetwork();
-
+  void forward(int row);
 };
 
 #endif  // MNISTMAIN_H_
