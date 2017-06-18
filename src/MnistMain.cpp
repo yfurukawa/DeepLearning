@@ -9,8 +9,6 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 #include "MnistReaderOpenCV.h"
-#include "ActivationFunction.h"
-#include "OutputLayer.h"
 #include "MnistMain.h"
 
 /*!------------------------------------------------
@@ -45,11 +43,11 @@ MnistMain::~MnistMain() {
 --------------------------------------------------*/
 int MnistMain::run() {
 	initialize();
-	establishNetwork();
 
 	for(int row = 0; row < images_.rows; ++row) {
 		forward(row);
 	}
+
 	std::cout << "Accuracy = " << (float)accuracyCount_/10000 << std::endl;
 	return 0;
 }
@@ -72,31 +70,21 @@ void MnistMain::initialize() {
 	std::string filename = "../dataset/t10k-labels-idx1-ubyte";
 	oneHotLabel_ = false;
 	labels_ = mnistReader->readMnistLabel(filename, oneHotLabel_);
-	/*
-	std::cout << labels.size() << std::endl;
-	std::cout << labels.at<float>(0) << std::endl;
-	*/
 
 	//read MNIST iamge into OpenCV Mat vector
 	filename = "../dataset/t10k-images-idx3-ubyte";
 	images_ = mnistReader->readMnist(filename, normalize_, flatten_);
 
-	if(images_.rows != 0) {
-		std::cout << images_.rows << std::endl;
-		std::cout << images_.cols << std::endl;
-		//cv::imshow("1st", images_.);
-//		cv::waitKey();
-	}
-
 	delete mnistReader;
+
+	establishNetwork();
 
 }
 
 /*!------------------------------------------------
-@brief
-@note
-@param[in]  パラメータ名  説明  [単位] (範囲)
-@param[out]
+@brief      ニューラルネットワーク設定
+@note       ノードおよびバイアスを定義し、初期化する
+@param[in]  なし
 @return     なし
 @attention  なし
 --------------------------------------------------*/
@@ -1044,48 +1032,39 @@ void MnistMain::establishNetwork() {
 	network["b3"] = (cv::Mat_<float>(1, 10) << -0.0602398477,0.0093262792,-0.0135994554,0.0216712784,0.0107372049,0.0661969855,-0.0839734226,-0.0091225114,0.0057696169,0.0532334968);
 
 	cv::RNG random;
-	random.fill(network["W1"], cv::RNG::UNIFORM, 0.0f, 1.0f);
+	//random.fill(network["W1"], cv::RNG::UNIFORM, 0.0f, 1.0f);
 	//random.fill(network["b1"], cv::RNG::UNIFORM, 0.0f, 1.0f);
-	random.fill(network["W2"], cv::RNG::UNIFORM, 0.0f, 1.0f);
+	//random.fill(network["W2"], cv::RNG::UNIFORM, 0.0f, 1.0f);
 	//random.fill(network["b2"], cv::RNG::UNIFORM, 0.0f, 1.0f);
-	random.fill(network["W3"], cv::RNG::UNIFORM, 0.0f, 1.0f);
+	//random.fill(network["W3"], cv::RNG::UNIFORM, 0.0f, 1.0f);
 	//random.fill(network["b3"], cv::RNG::UNIFORM, 0.0f, 1.0f);
 
 }
 
+/*!------------------------------------------------
+@brief      トレーニング
+@note       学習用画像データおよびラベルを用い、
+              学習する
+@param[in]  row  学習用画像の位置  [-] (0-)
+@return     なし
+@attention  なし
+--------------------------------------------------*/
 void MnistMain::forward(int row) {
 	cv::Mat a1, z1, a2, z2, a3, y;
-	ActivationFunction activeFunction;
-	OutputLayer outputLayer;
+
 	cv::Point minLocation, maxLocation;
 	double minValue(0.0), maxValue(0.0);
 
-	a1 = images_.row(row) * network.at("W1") + network.at("b1");
-	//std::cout << images_.row(row) << std::endl;
-	std::cout << a1 << std::endl;
-	z1 = activeFunction.sigmoid(a1);
-	std::cout << z1 << std::endl;
+	a1 = images_.row(row) * network["W1"] + network.at("b1");
+	z1 = activeFunction_.sigmoid(a1);
 	a2 = z1 * network.at("W2") + network.at("b2");
-	std::cout << a2 << std::endl;
-	z2 = activeFunction.sigmoid(a2);
-	std::cout << z2 << std::endl;
+	z2 = activeFunction_.sigmoid(a2);
 	a3 = z2 * network.at("W3") + network.at("b3");
-	std::cout << a2 << std::endl;
+	y = outputLayer_.softmax(a3);
 
-	y = outputLayer.softmax(a3);
 	cv::minMaxLoc(y, &minValue, &maxValue, &minLocation, &maxLocation);
-	/*
-	std::cout << y << std::endl;
-	std::cout << maxLocation.y << std::endl;
-	std::cout << *(labels_.row(row).begin<float>()) << std::endl;
-*/
 
-	if(maxLocation.y == (int)*(labels_.row(row).begin<float>())) {
+	if(maxLocation.x == (int)*(labels_.row(row).begin<float>())) {
 		++accuracyCount_;
 	}
-
-
-	//std::cout << y.rows << std::endl;
-	//std::cout << y.cols << std::endl;
-	//std::cout << y << std::endl;
 }

@@ -10,6 +10,8 @@
 // インクルードファイル ================================
 #include <string>
 #include <map>
+#include "ActivationFunction.h"
+#include "OutputLayer.h"
 
 // クラスの前方宣言 ====================================
 class MnistReaderOpenCV;
@@ -44,7 +46,9 @@ class MnistMain {
   bool normalize_;
   bool flatten_;
   std::map<std::string, cv::Mat > network;
-	int accuracyCount_;
+  int accuracyCount_;
+  ActivationFunction activeFunction_;
+  OutputLayer outputLayer_;
   MnistMain();
   void initialize();
   void establishNetwork();
