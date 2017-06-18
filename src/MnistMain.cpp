@@ -45,7 +45,7 @@ int MnistMain::run() {
 	initialize();
 
 	for(int row = 0; row < images_.rows; ++row) {
-		forward(row);
+		predict(row);
 	}
 
 	std::cout << "Accuracy = " << (float)accuracyCount_/10000 << std::endl;
@@ -1049,7 +1049,7 @@ void MnistMain::establishNetwork() {
 @return     なし
 @attention  なし
 --------------------------------------------------*/
-void MnistMain::forward(int row) {
+void MnistMain::predict(int row) {
 	cv::Mat a1, z1, a2, z2, a3, y;
 
 	cv::Point minLocation, maxLocation;

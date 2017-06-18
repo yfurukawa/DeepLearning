@@ -52,7 +52,7 @@ class MnistMain {
   MnistMain();
   void initialize();
   void establishNetwork();
-  void forward(int row);
+  void predict(int row);
 };
 
 #endif  // MNISTMAIN_H_
