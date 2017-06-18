@@ -31,6 +31,7 @@ class LossFunction {
   //! Destructor
   virtual ~LossFunction();
   float meanSquaredError(cv::Mat predictedValue, cv::Mat oneHotLabel);
+  float crossEntropyError(cv::Mat predictedValue, cv::Mat oneHotLabel);
 
  protected:
  private:
