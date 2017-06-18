@@ -10,6 +10,7 @@
 // インクルードファイル ================================
 #include <string>
 #include <map>
+#include <opencv2/core.hpp>
 #include "ActivationFunction.h"
 #include "OutputLayer.h"
 
