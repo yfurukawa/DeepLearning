@@ -8,6 +8,7 @@
 #define DIFFERENTIATION_H_
 
 // インクルードファイル ================================
+#include <opencv2/core.hpp>
 #include "TargetFunction.h"
 
 // クラスの前方宣言 ====================================
@@ -31,9 +32,11 @@ class Differentiation {
   //! Destructor
   virtual ~Differentiation();
   float numericalDiff(float x);
+  cv::Mat numericalDiff(cv::Mat x);
  protected:
  private:
   TargetFunction function_;
+  float h_;
 };
 
 #endif  // DIFFERENTIATION_H_

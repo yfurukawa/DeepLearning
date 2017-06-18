@@ -8,6 +8,7 @@
 #define TARGETFUNCTION_H_
 
 // インクルードファイル ================================
+#include <opencv2/core.hpp>
 
 // クラスの前方宣言 ====================================
 
@@ -30,6 +31,7 @@ class TargetFunction {
   //! Destructor
   virtual ~TargetFunction();
   float function(float x);
+  float function(cv::Mat x);
  protected:
  private:
 };
