@@ -30,3 +30,8 @@ Differentiation::~Differentiation() {
 @return     なし
 @attention  なし
 --------------------------------------------------*/
+float Differentiation::numericalDiff(float x) {
+	float h(1e-3);
+
+	return (function_.function(x + h) - function_.function( x - h )) / (2 * h);
+}

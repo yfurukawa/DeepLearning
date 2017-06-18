@@ -8,6 +8,7 @@
 #define DIFFERENTIATION_H_
 
 // インクルードファイル ================================
+#include "TargetFunction.h"
 
 // クラスの前方宣言 ====================================
 
@@ -29,9 +30,10 @@ class Differentiation {
   Differentiation();
   //! Destructor
   virtual ~Differentiation();
-
+  float numericalDiff(float x);
  protected:
  private:
+  TargetFunction function_;
 };
 
 #endif  // DIFFERENTIATION_H_
