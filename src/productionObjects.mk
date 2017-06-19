@@ -1,1 +1,1 @@
-OBJ = ActivationFunction.o  OutputLayer.o  ThreeLayeredNN.o MnistReaderVector.o MnistReaderOpenCV.o  MnistReaderCore.o ConfigDataHolder.o FileDAO.o MnistMain.o LossFunction.o Differentiation.o TargetFunction.o
+OBJ = ActivationFunction.o  OutputLayer.o  ThreeLayeredNN.o MnistReaderVector.o MnistReaderOpenCV.o  MnistReaderCore.o ConfigDataHolder.o FileDAO.o MnistMain.o LossFunction.o Differentiation.o TargetFunction.o KeyValueParser.o
