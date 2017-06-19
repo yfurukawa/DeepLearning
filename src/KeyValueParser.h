@@ -6,11 +6,11 @@
 
 using namespace std;
 
-class keyValueParser {
+class KeyValueParser {
 private:
 public:
-	keyValueParser() {};
-	virtual ~keyValueParser() {};
+	KeyValueParser() {};
+	virtual ~KeyValueParser() {};
 	std::map<string, string> parseString(const string&);
 };
 

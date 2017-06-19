@@ -3,11 +3,11 @@
 #include <sstream>
 #include <iostream>
 
-#include "keyValueParser.h"
+#include "KeyValueParser.h"
 
 using namespace boost::spirit;
 
-map<string, string> keyValueParser::parseString(const string& inputString) {
+map<string, string> KeyValueParser::parseString(const string& inputString) {
 	istringstream inputStream(inputString);
 	map<string, string> valueMap;
 	string in;

@@ -3,16 +3,16 @@
 
 #include <gtest/gtest.h>
 
-class keyValueParser;
+class KeyValueParser;
 
 using namespace std;
 
-class keyValueParserTest : public ::testing::Test {
+class KeyValueParserTest : public ::testing::Test {
 protected:
-	keyValueParser* sut;
+	KeyValueParser* sut;
 public:
-	keyValueParserTest() : sut(NULL) {};
-	virtual ~keyValueParserTest() {};
+	KeyValueParserTest() : sut(NULL) {};
+	virtual ~KeyValueParserTest() {};
 	virtual void SetUp();
 	virtual void TearDown();
 
