@@ -54,6 +54,7 @@ class MnistMain {
   void initialize();
   void establishNetwork();
   void predict(int row);
+  cv::Mat getMiniBatch(cv::Mat& wholeImages);
 };
 
 #endif  // MNISTMAIN_H_
