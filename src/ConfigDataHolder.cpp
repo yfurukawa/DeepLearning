@@ -14,7 +14,7 @@
 @attention  なし
 --------------------------------------------------*/
 ConfigDataHolder::ConfigDataHolder() : configFileName_("NeuralNetwork.conf"), hiddenLayer_(3), activeFunction_("sigmoid"),
-	inputNode_(784), outputClass_(10), configFile_(NULL)
+	inputNode_(784), outputClass_(10), miniBatchSize_(100), configFile_(NULL)
 {
 	prepareConfigurationData();
 }
@@ -97,6 +97,18 @@ int ConfigDataHolder::getOutputClass() const {
 --------------------------------------------------*/
 std::vector<int> ConfigDataHolder::getHiddenNode() const {
 	  return hiddenNode_;
+}
+
+/*!------------------------------------------------
+@brief
+@note
+@param[in]  パラメータ名  説明  [単位] (範囲)
+@param[out]
+@return     なし
+@attention  なし
+--------------------------------------------------*/
+int ConfigDataHolder::getMiniBatchSize() const {
+	  return miniBatchSize_;
 }
 
 /*!------------------------------------------------

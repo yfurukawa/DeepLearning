@@ -8,6 +8,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 #include "MnistReaderOpenCV.h"
+#include "ConfigDataHolder.h"
 #include "MnistMain.h"
 
 /*!------------------------------------------------
@@ -43,7 +44,7 @@ MnistMain::~MnistMain() {
 int MnistMain::run() {
 	initialize();
 
-	for(int row = 0; row < images_.rows; ++row) {
+	for(int row = 0; row < testImages_.rows; ++row) {
 		predict(row);
 	}
 
@@ -63,16 +64,24 @@ void MnistMain::initialize() {
 	MnistReaderOpenCV* mnistReader;
 	mnistReader = new MnistReaderOpenCV();
 
-	//イメージ数 = 10000
+	//テスト画像イメージ数 = 10000
 	//イメージサイズ = 28 * 28
 
+	// テスト画像ラベルの読み込み
 	std::string filename = "../dataset/t10k-labels-idx1-ubyte";
 	oneHotLabel_ = false;
-	labels_ = mnistReader->readMnistLabel(filename, oneHotLabel_);
+	testLabels_ = mnistReader->readMnistLabel(filename, oneHotLabel_);
 
 	//read MNIST iamge into OpenCV Mat vector
 	filename = "../dataset/t10k-images-idx3-ubyte";
-	images_ = mnistReader->readMnist(filename, normalize_, flatten_);
+	testImages_ = mnistReader->readMnist(filename, normalize_, flatten_);
+
+	filename = "../dataset/train-labels-idx1-ubyte";
+	oneHotLabel_ = false;
+	trainingLabels_ = mnistReader->readMnistLabel(filename, oneHotLabel_);
+
+	filename = "../dataset/train-images-idx3-ubyte";
+	trainingImages_ = mnistReader->readMnist(filename, normalize_, flatten_);
 
 	delete mnistReader;
 
@@ -1041,10 +1050,9 @@ void MnistMain::establishNetwork() {
 }
 
 /*!------------------------------------------------
-@brief      トレーニング
-@note       学習用画像データおよびラベルを用い、
-              学習する
-@param[in]  row  学習用画像の位置  [-] (0-)
+@brief      推定
+@note       学習されたパラメータを用い、入力された画像データを推定する
+@param[in]  row  入力画像の位置  [-] (0-)
 @return     なし
 @attention  なし
 --------------------------------------------------*/
@@ -1054,7 +1062,7 @@ void MnistMain::predict(int row) {
 	cv::Point minLocation, maxLocation;
 	double minValue(0.0), maxValue(0.0);
 
-	a1 = images_.row(row) * network["W1"] + network.at("b1");
+	a1 = testImages_.row(row) * network["W1"] + network.at("b1");
 	z1 = activeFunction_.sigmoid(a1);
 	a2 = z1 * network.at("W2") + network.at("b2");
 	z2 = activeFunction_.sigmoid(a2);
@@ -1063,7 +1071,25 @@ void MnistMain::predict(int row) {
 
 	cv::minMaxLoc(y, &minValue, &maxValue, &minLocation, &maxLocation);
 
-	if(maxLocation.x == (int)*(labels_.row(row).begin<float>())) {
+	if(maxLocation.x == (int)*(testLabels_.row(row).begin<float>())) {
 		++accuracyCount_;
 	}
+}
+
+/*!------------------------------------------------
+@brief      ミニバッチ取得
+@note       複数の画像データから任意の数だけ画像データを取得する
+@param[in]  wholeImages  抽出元の画像イメージデータ  [-] (0-)
+@return     任意の数だけ抽出した画像データ
+@attention  なし
+--------------------------------------------------*/
+cv::Mat MnistMain::getMiniBatch(cv::Mat& wholeImages) {
+	int miniBatchSize(ConfigDataHolder::getInstance().getMiniBatchSize());
+	cv::Mat batchImages;
+	cv::RNG rnd(cv::getTickCount());
+
+	for(int number = 0; number < miniBatchSize; ++number) {
+		batchImages.push_back(wholeImages.row(rnd.uniform(0, wholeImages.rows)));
+	}
+	return batchImages;
 }
