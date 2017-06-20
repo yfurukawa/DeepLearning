@@ -40,6 +40,7 @@ class ConfigDataHolder {
   int getInputNode() const;
   int getOutputClass() const;
   std::vector<int> getHiddenNode() const;
+  int getMiniBatchSize() const;
 
  protected:
  private:
@@ -49,8 +50,9 @@ class ConfigDataHolder {
   int inputNode_;  //!< 入力層のユニット数
   int outputClass_;  //!< 出力層のクラス数
   std::vector<int> hiddenNode_; //!< 隠れ層の出力ノード数
-
+  int miniBatchSize_; //!< 学習時のミニバッチサイズ
   IInputter* configFile_;
+
   //! Constructor
   ConfigDataHolder();
   ConfigDataHolder(ConfigDataHolder const&);  // 実装しないこと
