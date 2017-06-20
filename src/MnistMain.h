@@ -41,13 +41,15 @@ class MnistMain {
  private:
   int argc_;
   char** argv_;
-  cv::Mat labels_;
-  cv::Mat images_;
-  bool oneHotLabel_;
-  bool normalize_;
-  bool flatten_;
-  std::map<std::string, cv::Mat > network;
-  int accuracyCount_;
+  cv::Mat testLabels_;  //!< テスト画像ラベル
+  cv::Mat testImages_;  //!< テスト画像
+  cv::Mat trainingLabels_; //!< 訓練画像ラベル
+  cv::Mat trainingImages_; //!< 訓練画像
+  bool oneHotLabel_;  //!< ラベルの表記をone-Hot表現にする
+  bool normalize_;    //!< 画像データを正規化する
+  bool flatten_;      //!< 画像データを1次元配列に整形する
+  std::map<std::string, cv::Mat > network;  //!< ニューラルネットワーク
+  int accuracyCount_;  //!< テストの正解率
   ActivationFunction activeFunction_;
   OutputLayer outputLayer_;
   MnistMain();
